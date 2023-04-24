@@ -9,7 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Atelier;
 use App\Entity\Theme;
-
+use App\Entity\Hotel;
+use App\Entity\Chambre;
 
 class MainController extends AbstractController
 {
@@ -18,6 +19,8 @@ class MainController extends AbstractController
     {
         $themes = $doctrine->getRepository(Theme::Class)->findAll();
         $ateliers = $doctrine->getRepository(Atelier::Class)->findAll();
+        $hotels = $doctrine->getRepository(Hotel::Class)->findAll();
+        $chambres = $doctrine->getRepository(Chambre::Class)->findAll();
         //dd($ateliers);
         #$manager->persist()
         #$manager->flush()
@@ -26,6 +29,8 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
             'ateliers' => $ateliers,
             'themes' => $themes,
+            'hotels' => $hotels,
+            'chambres' => $chambres,
         ]);
     }
 }

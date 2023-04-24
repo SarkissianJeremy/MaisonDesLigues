@@ -1,0 +1,2 @@
+insert into hotel(nom, adresse1, cp, mail, tel, ville) values ("Ibis Styles", "172 Rue Pierre Mauroy", "59 000", "ibis@hotel.com", "03 20 30 00 54", "Lille");
+insert into hotel(nom, adresse1, cp, mail, tel, ville) values ("Ibis Budget", "10, Rue de Courtrai", "59 000", "ibis@hotel.com", "03 20 30 00 54", "Lille");

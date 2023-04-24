@@ -24,7 +24,7 @@ class Chambre
     #[ORM\OneToMany(mappedBy: 'Chambre', targetEntity: Inscription::class)]
     private Collection $inscriptions;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'chambres')]
     private ?Hotel $Hotel = null;
 
     public function __construct()
