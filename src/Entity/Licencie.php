@@ -49,8 +49,8 @@ class Licencie
     #[ORM\ManyToOne(inversedBy: 'licencies')]
     private ?Qualite $qualite = null;
 
-    #[ORM\Column]
-    private ?int $numlicence = null;
+    #[ORM\Column(length: 255)]
+    private ?string $numlicence = null;
 
     public function getId(): ?int
     {
@@ -189,15 +189,16 @@ class Licencie
         return $this;
     }
 
-    public function getNumlicence(): ?int
+    public function getNumlicence(): ?string
     {
         return $this->numlicence;
     }
 
-    public function setNumlicence(int $numlicence): self
+    public function setNumlicence(string $numlicence): self
     {
         $this->numlicence = $numlicence;
 
         return $this;
     }
+
 }

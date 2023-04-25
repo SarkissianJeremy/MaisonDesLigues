@@ -15,7 +15,7 @@ drop table if exists qualite;
 
   CREATE TABLE LICENCIE
    (    ID int PRIMARY KEY ,
-    NUMLICENCE int(11),
+    NUMLICENCE VARCHAR(50),
     NOM VARCHAR(70 ),
     PRENOM VARCHAR(70 ),
     ADRESSE1 VARCHAR(255),
