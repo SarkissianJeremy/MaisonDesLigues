@@ -34,6 +34,7 @@
     }
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css">
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
@@ -67,8 +68,34 @@
       </li>      
     </ul>
   </div>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="#"> <img src="img/mdl.png" alt="Logo" width="100"></a>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a href="#" class="nav-link active">Accueil</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Compte</a>
+            <div class="dropdown-menu">
+                <a href="register" class="dropdown-item">Inscription</a>
+                <a href="login" class="dropdown-item">Connexion</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">Mot de passe perdu</a>
+            </div>
+        </li>
+    </ul>     
+
 </nav>
+
 <div class="part">
+{% if error|default(null) %}
+    <h1 class="alert alert-danger center">{{error}}</h1>
+{% endif %}
 <h2 style="text-decoration: underline;"><center> Dates du congrès : </center></h2>
 <p><center> samedi 8 et dimanche 9 septembre 2023 </center></p>
 </div
