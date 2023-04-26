@@ -22,6 +22,7 @@ class ResetPasswordRequestFormType extends AbstractType
             ])
             ->add('numlicence', TextType::class, [
                 'required' => false,
+                'label' => 'Numéro de licencié',
                 'constraints' => [
                     new Length([
                         'min' => 11,

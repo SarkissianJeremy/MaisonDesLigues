@@ -3,6 +3,11 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,10 +19,10 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputnumlicence">numLicence</label>
-    <input type="text" value="{{ last_username }}" name="numlicence" id="inputnumlicence" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
+    <h1 class="h3 mb-3 font-weight-normal">Enregistrer vous</h1>
+    <label for="inputnumlicence">numéro de licencié</label>
+    <input type="text"   value="{{ last_username }}" name="numlicence" id="inputnumlicence" class="form-control" autocomplete="username" required autofocus>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -35,8 +40,14 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-lg btn-success" type="submit">
+        Se connecter
     </button>
+    <a class="btn btn-lg btn-primary" href="register">
+        S'enregistrer
+    </a>
+    <a class="btn btn-lg btn-primary" href="/">
+        Accueil
+    </a>
 </form>
 {% endblock %}

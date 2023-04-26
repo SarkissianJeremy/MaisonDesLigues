@@ -20,6 +20,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('numLicence', TextType::class, [
+                'label' => 'Numéro de licencié',
                 'constraints' => [
                     new Length([
                         'min' => 11,
@@ -28,14 +29,6 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ])
                 ]
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
