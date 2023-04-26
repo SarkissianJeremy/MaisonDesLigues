@@ -21,6 +21,8 @@ class MainController extends AbstractController
         $ateliers = $doctrine->getRepository(Atelier::Class)->findAll();
         $hotels = $doctrine->getRepository(Hotel::Class)->findAll();
         $chambres = $doctrine->getRepository(Chambre::Class)->findAll();
+        isset($_GET['error']) ? $error = $_GET['error'] : $error='';
+        
         //dd($ateliers);
         #$manager->persist()
         #$manager->flush()
@@ -31,6 +33,7 @@ class MainController extends AbstractController
             'themes' => $themes,
             'hotels' => $hotels,
             'chambres' => $chambres,
+            'error' => $error,
         ]);
     }
 }

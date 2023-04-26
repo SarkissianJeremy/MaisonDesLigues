@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Form\ForgotFormType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Doctrine\Persistence\ManagerRegistry;
 
-class RegistrationController extends AbstractController
+class ForgotController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
@@ -28,11 +28,11 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
+    #[Route('/forgot', name: 'app_forgot')]
+    public function forgot(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(ForgotFormType::class, $user);
         $form->handleRequest($request);
         
         
@@ -46,7 +46,6 @@ class RegistrationController extends AbstractController
         }
         
         if ($form->isSubmitted() && $form->isValid()) {
-            
             $licencie = $doctrine->getRepository(Licencie::Class)->findOneBy(array('numlicence' => $form->get('numLicence')->getData()));
             if (!isset($licencie))
             {
@@ -61,7 +60,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            //dd($form->getData());
+            dd($form->getData());
             
             $user->setDateInscription(new \DateTime());
             $user->setDateEnregistrementArrivee(new \DateTime());
@@ -77,14 +76,14 @@ class RegistrationController extends AbstractController
                     ->from(new Address('app@mdl.fr', 'MDLBot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('forgot/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_main');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('forgot/forgot.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -100,12 +99,12 @@ class RegistrationController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_forgot');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_forgot');
     }
 }
