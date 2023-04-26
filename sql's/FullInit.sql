@@ -1,43 +1,3 @@
-drop TABLE if exists club;
-drop table if exists licencie;
-drop table if exists qualite;
-
-  CREATE TABLE club
-   (    ID int PRIMARY KEY,
-    NOM VARCHAR(50),
-    ADRESSE1 VARCHAR(60),
-    ADRESSE2 VARCHAR(60),
-    CP CHAR(5),
-    VILLE VARCHAR(60),
-    TEL CHAR(14)
-   ) ;
-
-
-  CREATE TABLE LICENCIE
-   (    ID int PRIMARY KEY ,
-    NUMLICENCE VARCHAR(50),
-    NOM VARCHAR(70 ),
-    PRENOM VARCHAR(70 ),
-    ADRESSE1 VARCHAR(255),
-    ADRESSE2 VARCHAR(255),
-    CP CHAR(6),
-    VILLE VARCHAR(70),
-    TEL CHAR(14),
-    MAIL VARCHAR(100),
-    DATEADHESION DATE,
-    IDCLUB int,
-    IDQUALITE int
-   )  ;
-
-
-  CREATE TABLE QUALITE
-   (    ID int PRIMARY KEY,
-    LIBELLEQUALITE VARCHAR(50)
-   ) ;
-   
-
-
-
 Insert into MDL.CLUB (ID,NOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL) values ('1','Institut Vallier Marseille','67a rue ferrari',null,'13005','Marseille','0491476657	');
 Insert into MDL.CLUB (ID,NOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL) values ('2','Escrime Provence','1bis impasse des Independants',null,'13013','Marseille','0671205105	');
 Insert into MDL.CLUB (ID,NOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL) values ('3','Toulon Var Esscrime','Complexe sportif Vert Coteau','Rue Sous Lieutenant Guy Friggeri','83000','Toulon','0494366517	');
@@ -390,13 +350,55 @@ Insert into MDL.LICENCIE (ID,NUMLICENCE,NOM,PRENOM,ADRESSE1,ADRESSE2,CP,VILLE,TE
 Insert into MDL.LICENCIE (ID,NUMLICENCE,NOM,PRENOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL,MAIL,DATEADHESION,IDCLUB_ID,QUALITE_ID) values ('299','16560715389','Jacob','Loevan','CP 936, 2225 Et Rd.','7055 Vestibulum Chemin','22101 ','Edremit','03 97 70 27 29','dui.nec.tempus@quamCurabiturvel.ca','2002-09-10','17','20');
 Insert into MDL.LICENCIE (ID,NUMLICENCE,NOM,PRENOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL,MAIL,DATEADHESION,IDCLUB_ID,QUALITE_ID) values ('300','16111117109','Joly','Benjamin','924-5669 Ad Rd.','Appartement 758-9185 Enim. Chemin','54414 ','Schwechat','04 66 06 47 11','fermentum.metus.Aenean@miDuisrisus.ca','2001-11-04/11/01','13','23');
 
+insert into atelier(libelle, nb_places_maxi) values ("LE CLUB ET SON PROJET", 100);
+insert into atelier(libelle, nb_places_maxi) values ("LE FONCTIONNEMENT DU CLUB", 100);
+insert into atelier(libelle, nb_places_maxi) values ("LES OUTILS A DISPOSITION ET REMIS AUX CLUBS", 100);
+insert into atelier(libelle, nb_places_maxi) values ("OBSERVATOIRE DES METIERS DE L'ESCRIME", 100);
+insert into atelier(libelle, nb_places_maxi) values ("I.F.F.E", 100);
+insert into atelier(libelle, nb_places_maxi) values ("DEVELOPPEMENT DURABLE", 100);
 
+insert into theme(atelier_id, libelle) values (1, "Diagnostic et identification des critères du club");
+insert into theme(atelier_id, libelle) values (1, "Analyse systémique de l'environnement et méthodologie de mise en oeuvre du projet");
+insert into theme(atelier_id, libelle) values (1, "Actions soludaires et innovantes");
+insert into theme(atelier_id, libelle) values (1, "Financements");
+insert into theme(atelier_id, libelle) values (1, "Outils et documentation");
+insert into theme(atelier_id, libelle) values (1, "Valoriser et communiquer sur le projet");
 
+insert into theme(atelier_id, libelle) values (2, "Création - Obligations légales");
+insert into theme(atelier_id, libelle) values (2, "Gestion du personnel, de la structure et des conflits");
+insert into theme(atelier_id, libelle) values (2, "Relations internes, externes et avec le comité départemental, la ligue et la fédération");
+insert into theme(atelier_id, libelle) values (2, "Conventions");
+insert into theme(atelier_id, libelle) values (2, "Partenariats");
 
+insert into theme(atelier_id, libelle) values (3, "Logiciel FFE de gestion des compétitions (présentation et formation)");
+insert into theme(atelier_id, libelle) values (3, "Présentation du document <L'arbitrage en images>");
+insert into theme(atelier_id, libelle) values (3, "Plaquettes<Guide projet du club>");
+insert into theme(atelier_id, libelle) values (3, "Labellisation du club");
+insert into theme(atelier_id, libelle) values (3, "Aménagement des équipements");
+insert into theme(atelier_id, libelle) values (3, "Assurances");
 
+insert into theme(atelier_id, libelle) values (4, "Observations et analyses sur l'encadrement actuel");
+insert into theme(atelier_id, libelle) values (4, "Propositions de nouveaux schémas d'organisation");
+insert into theme(atelier_id, libelle) values (4, "Profils types et pratiques innovantes");
+insert into theme(atelier_id, libelle) values (4, "Critères et seuils nécessaires à la pérennité de l'emploi");
+insert into theme(atelier_id, libelle) values (4, "Exercice du métier d'enseignant (avantages et inconvénients)");
 
+insert into theme(atelier_id, libelle) values (5, "Présentation");
+insert into theme(atelier_id, libelle) values (5, "Fonctionnement");
+insert into theme(atelier_id, libelle) values (5, "Objectifs");
+insert into theme(atelier_id, libelle) values (5, "Nouveaux Diplômes");
+insert into theme(atelier_id, libelle) values (5, "Financements");
 
+insert into theme(atelier_id, libelle) values (6, "Les enjeux climatiques, énergétiques et économiques");
+insert into theme(atelier_id, libelle) values (6, "Sport et développement durable");
+insert into theme(atelier_id, libelle) values (6, "Démarche fédérale");
+insert into theme(atelier_id, libelle) values (6, "Echange");
 
+insert into hotel(nom, adresse1, cp, mail, tel, ville) values ("Ibis Styles", "172 Rue Pierre Mauroy", "59 000", "ibis@hotel.com", "03 20 30 00 54", "Lille");
+insert into hotel(nom, adresse1, cp, mail, tel, ville) values ("Ibis Budget", "10, Rue de Courtrai", "59 000", "ibis@hotel.com", "03 20 30 00 54", "Lille");
 
+insert into chambre(hotel_id, libelle, tarif) values(1, "Single", 90);
+insert into chambre(hotel_id, libelle, tarif) values(1, "Double", 100);
 
-
+insert into chambre(hotel_id, libelle, tarif) values(2, "Single", 65);
+insert into chambre(hotel_id, libelle, tarif) values(2, "Double", 75);

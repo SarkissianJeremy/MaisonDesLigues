@@ -5,26 +5,25 @@ namespace App\Entity;
 use App\Repository\LicencieRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: LicencieRepository::class)]
 class Licencie
 {
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 70)]
+    #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 70)]
+    #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     private ?string $adresse1 = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adresse2 = null;
 
     #[ORM\Column]
     private ?int $cp = null;
@@ -35,7 +34,7 @@ class Licencie
     #[ORM\Column]
     private ?int $tel = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -47,8 +46,11 @@ class Licencie
     #[ORM\ManyToOne(inversedBy: 'licencies')]
     private ?Qualite $qualite = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] 
     private ?string $numlicence = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $adresse2 = null;
 
     public function getId(): ?int
     {
@@ -87,18 +89,6 @@ class Licencie
     public function setAdresse1(string $adresse1): self
     {
         $this->adresse1 = $adresse1;
-
-        return $this;
-    }
-
-    public function getAdresse2(): ?string
-    {
-        return $this->adresse2;
-    }
-
-    public function setAdresse2(string $adresse2): self
-    {
-        $this->adresse2 = $adresse2;
 
         return $this;
     }
@@ -199,4 +189,15 @@ class Licencie
         return $this;
     }
 
+    public function getAdresse2(): ?string
+    {
+        return $this->adresse2;
+    }
+
+    public function setAdresse2(string $adresse2): self
+    {
+        $this->adresse2 = $adresse2;
+
+        return $this;
+    }
 }

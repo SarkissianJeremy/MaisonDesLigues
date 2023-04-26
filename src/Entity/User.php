@@ -7,39 +7,33 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-class User
+#[UniqueEntity(fields: ['numlicence'], message: 'There is already an account with this numlicence')]
+#[UniqueEntity(fields: ['numlicence'], message: 'There is already an account with this numlicence')]
+#[UniqueEntity(fields: ['numlicence'], message: 'There is already an account with this numlicence')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $numlicence = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
+    #[ORM\Column]
+    private array $roles = [];
 
-    #[ORM\Column(length: 255)]
-    private ?string $adresse1 = null;
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $adresse2 = null;
-
-    #[ORM\Column(length: 10)]
-    private ?string $cp = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $ville = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $tel = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $mail = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
@@ -47,11 +41,14 @@ class User
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateEnregistrementArrivee = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $cleWifi = null;
-
-    #[ORM\OneToMany(mappedBy: 'Participant', targetEntity: Inscription::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Inscription::class)]
     private Collection $inscriptions;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
     public function __construct()
     {
@@ -63,100 +60,69 @@ class User
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNumLicence(): ?string
     {
-        return $this->nom;
+        return $this->numlicence;
     }
 
-    public function setNom(string $nom): self
+    public function setNumLicence(string $numlicence): self
     {
-        $this->nom = $nom;
+        $this->numlicence = $numlicence;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->prenom;
+        return (string) $this->numlicence;
     }
 
-    public function setPrenom(string $prenom): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->prenom = $prenom;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getAdresse1(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->adresse1;
+        return $this->password;
     }
 
-    public function setAdresse1(string $adresse1): self
+    public function setPassword(string $password): self
     {
-        $this->adresse1 = $adresse1;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function getAdresse2(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        return $this->adresse2;
-    }
-
-    public function setAdresse2(string $adresse2): self
-    {
-        $this->adresse2 = $adresse2;
-
-        return $this;
-    }
-
-    public function getCp(): ?string
-    {
-        return $this->cp;
-    }
-
-    public function setCp(string $cp): self
-    {
-        $this->cp = $cp;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getTel(): ?string
-    {
-        return $this->tel;
-    }
-
-    public function setTel(string $tel): self
-    {
-        $this->tel = $tel;
-
-        return $this;
-    }
-
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): self
-    {
-        $this->mail = $mail;
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getDateInscription(): ?\DateTimeInterface
@@ -183,18 +149,6 @@ class User
         return $this;
     }
 
-    public function getCleWifi(): ?string
-    {
-        return $this->cleWifi;
-    }
-
-    public function setCleWifi(string $cleWifi): self
-    {
-        $this->cleWifi = $cleWifi;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Inscription>
      */
@@ -207,7 +161,7 @@ class User
     {
         if (!$this->inscriptions->contains($inscription)) {
             $this->inscriptions->add($inscription);
-            $inscription->setParticipant($this);
+            $inscription->setUser($this);
         }
 
         return $this;
@@ -217,10 +171,34 @@ class User
     {
         if ($this->inscriptions->removeElement($inscription)) {
             // set the owning side to null (unless already changed)
-            if ($inscription->getParticipant() === $this) {
-                $inscription->setParticipant(null);
+            if ($inscription->getUser() === $this) {
+                $inscription->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

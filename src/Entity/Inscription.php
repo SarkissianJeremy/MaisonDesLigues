@@ -30,6 +30,9 @@ class Inscription
     #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'Inscriptions')]
     private Collection $ateliers;
 
+    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->Restauration = new ArrayCollection();
@@ -120,5 +123,17 @@ class Inscription
     public function getAteliers(): Collection
     {
         return $this->ateliers;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

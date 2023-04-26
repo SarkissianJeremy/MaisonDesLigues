@@ -4,7 +4,6 @@ insert into theme(atelier_id, libelle) values (1, "Actions soludaires et innovan
 insert into theme(atelier_id, libelle) values (1, "Financements");
 insert into theme(atelier_id, libelle) values (1, "Outils et documentation");
 insert into theme(atelier_id, libelle) values (1, "Valoriser et communiquer sur le projet");
-insert into theme(atelier_id, libelle) values (1, "");
 
 insert into theme(atelier_id, libelle) values (2, "Création - Obligations légales");
 insert into theme(atelier_id, libelle) values (2, "Gestion du personnel, de la structure et des conflits");
