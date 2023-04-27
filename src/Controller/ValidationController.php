@@ -137,8 +137,7 @@ class ValidationController extends AbstractController
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
-                ->subject('Time for Symfony Mailer!')
-                ->text('Sending emails is fun again!')
+                ->subject('Confirmation inscription :')
                 ->html($stylecss . sprintf($format, $licencie->getNom(),
                         $licencie->getPrenom(),
                         $licencie->getQualite()->getLibellequalite(),
