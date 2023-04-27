@@ -399,11 +399,11 @@ insert into theme(atelier_id, libelle) values (6, "Echange");
 insert into hotel(nom, adresse1, cp, mail, tel, ville) values ("Ibis Styles", "172 Rue Pierre Mauroy", "59 000", "ibis@hotel.com", "03 20 30 00 54", "Lille");
 insert into hotel(nom, adresse1, cp, mail, tel, ville) values ("Ibis Budget", "10, Rue de Courtrai", "59 000", "ibis@hotel.com", "03 20 30 00 54", "Lille");
 
-insert into chambre(hotel_id, libelle, tarif) values(1, "Single", 90);
-insert into chambre(hotel_id, libelle, tarif) values(1, "Double", 100);
+insert into chambre(hotel_id, libelle, tarif) values(1, "Single Ibis Style", 90);
+insert into chambre(hotel_id, libelle, tarif) values(1, "Double Ibis Style", 100);
 
-insert into chambre(hotel_id, libelle, tarif) values(2, "Single", 65);
-insert into chambre(hotel_id, libelle, tarif) values(2, "Double", 75);
+insert into chambre(hotel_id, libelle, tarif) values(2, "Single Ibis Budget", 65);
+insert into chambre(hotel_id, libelle, tarif) values(2, "Double Ibis Budget", 75);
 
 INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-08', 'Samedi: Midi');
 INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-08', 'Samedi: Soir');
