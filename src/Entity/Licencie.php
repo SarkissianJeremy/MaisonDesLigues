@@ -41,11 +41,9 @@ class Licencie
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateadhesion = null;
 
-    #[ORM\Column(name:"idclub")]
     #[ORM\ManyToOne(inversedBy: 'licencies')]
     private ?Club $idclub = null;
 
-    #[ORM\Column(name:"idqualite")]
     #[ORM\ManyToOne(inversedBy: 'licencies')]
     private ?Qualite $qualite = null;
 

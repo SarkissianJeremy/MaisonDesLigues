@@ -11,6 +11,7 @@ use App\Entity\Atelier;
 use App\Entity\Theme;
 use App\Entity\Hotel;
 use App\Entity\Chambre;
+use App\Entity\Vacation;
 
 class MainController extends AbstractController
 {
@@ -21,6 +22,8 @@ class MainController extends AbstractController
         $ateliers = $doctrine->getRepository(Atelier::Class)->findAll();
         $hotels = $doctrine->getRepository(Hotel::Class)->findAll();
         $chambres = $doctrine->getRepository(Chambre::Class)->findAll();
+        $vacations = $doctrine->getRepository(Vacation::Class)->findAll();
+
         //dd($ateliers);
         #$manager->persist()
         #$manager->flush()
@@ -31,6 +34,7 @@ class MainController extends AbstractController
             'themes' => $themes,
             'hotels' => $hotels,
             'chambres' => $chambres,
+            'vacations' => $vacations,
         ]);
     }
 }

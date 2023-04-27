@@ -8,7 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VacationRepository::class)]
 class Vacation
+{   
+    public function __construct()
 {
+    $this->date = new \DateTime('now');
+}
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -64,4 +69,6 @@ class Vacation
 
         return $this;
     }
+    
+ 
 }

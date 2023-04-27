@@ -51,16 +51,8 @@
       <li class="nav-item active">
         <a class="nav-link" href="inscription">Inscription <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Inscription
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li class="nav-item active">
+        <a class="nav-link" href="ajout\ateliers">Ajouter <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,6 +81,11 @@
     {% for atelier in ateliers %}
         <div>
         <h4>{{atelier.id }}. {{ atelier.libelle }}</h4>
+        {% for vacation in vacations %}
+            {% if vacation.getAtelier()|trans == atelier.id %}
+            <p>{{vacation.getDateheureDebut()|date("m/d/Y") }} - {{vacation.getDateheureFin()|date("m/d/Y") }}</p>
+            {% endif %}
+        {% endfor %}
         {% for theme in themes %}
             {% if atelier.id == theme.atelier.id %}
                 <p> * {{theme.libelle}}</p>
