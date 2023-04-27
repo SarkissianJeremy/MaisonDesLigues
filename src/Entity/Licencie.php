@@ -32,7 +32,7 @@ class Licencie
     private ?string $ville = null;
 
     #[ORM\Column]
-    private ?int $tel = null;
+    private ?string $tel = null;
 
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
@@ -117,12 +117,12 @@ class Licencie
         return $this;
     }
 
-    public function getTel(): ?int
+    public function getTel(): ?string
     {
         return $this->tel;
     }
 
-    public function setTel(int $tel): self
+    public function setTel(string $tel): self
     {
         $this->tel = $tel;
 

@@ -14,14 +14,92 @@
 </style>
 
 <div class="example-wrapper">
+    {% if licencie is defined %}
+        <form>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Nom</label>
+                <input type="text" class="form-control" value="{{ licencie.getNom() }}" disabled>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Prenom</label>
+                <input type="text" class="form-control" value="{{ licencie.getPrenom() }}" disabled>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Qualité</label>
+                <input type="text" class="form-control" value="{{ licencie.getQualite().getLibellequalite() }}" disabled>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Numéro Licence</label>
+                <input type="text" class="form-control" value="{{ licencie.getNumLicence() }}" disabled>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">Adresse</label>
+                <input type="text" class="form-control" value="{{ licencie.getAdresse1() ~ licencie.getAdresse2()  }}" disabled>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputState">Ville</label>
+                <input type="text" class="form-control" value="{{ licencie.getVille() }}" disabled>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="inputZip">Cp</label>
+                <input type="text" class="form-control" value="{{ licencie.getCp() }}" disabled>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="text" class="form-control"  value="{{ licencie.getMail() }}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Tel</label>
+                <input type="text" class="form-control"  value="{{ licencie.getTel() }}" disabled>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Modifier Email</button>
+          </form>
+    {% endif %}
     {% form_theme inscriptionForm 'bootstrap_5_layout.html.twig' %}
     {{ form_start(inscriptionForm) }}
-        {{ form_row(inscriptionForm) }}
-
+    <hr class="hr" />
+        {{ form_row(inscriptionForm.ateliers) }}
+        <hr class="hr" />
+        {{ form_row(inscriptionForm.Chambre) }}
+        <hr class="hr" />
+        
+        <div class="test">
+        {{ form_row(inscriptionForm.Restauration) }}
+        </div>
+        
+        
         <button type="submit" class="btn btn-lg btn-success">Enregistrer</button> 
-   <a class="btn btn-lg btn-primary" href="/">
-        Accueil
-    </a>
+        <a class="btn btn-lg btn-primary" href="/">
+             Accueil
+         </a>
+        
+        {% if prix is defined and prix is not null %}
+        <a class="btn btn-lg btn-danger" href="#">
+             Prix : {{ prix }} €
+        </a>
+        {% endif %}
     {{ form_end(inscriptionForm) }}
 </div>
+    
+<style>
+.form-check {
+    float:left;
+    display:block;
+    margin: 10px;
+}
+</style>
+
 {% endblock %}
+

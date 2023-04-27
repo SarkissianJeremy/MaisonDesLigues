@@ -24,17 +24,18 @@ class Atelier
     #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Theme::class)]
     private Collection $Themes;
 
-    #[ORM\ManyToMany(targetEntity: Inscription::class, inversedBy: 'ateliers')]
-    private Collection $Inscriptions;
 
     #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Vacation::class)]
     private Collection $vacations;
 
+    #[ORM\ManyToMany(targetEntity: Inscription::class, mappedBy: 'ateliers')]
+    private Collection $inscriptions;
+
     public function __construct()
     {
         $this->Themes = new ArrayCollection();
-        $this->Inscriptions = new ArrayCollection();
         $this->vacations = new ArrayCollection();
+        $this->inscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,33 +63,6 @@ class Atelier
     public function setNbPlacesMaxi(int $nbPlacesMaxi): self
     {
         $this->nbPlacesMaxi = $nbPlacesMaxi;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Inscription>
-     */
-    public function getInscriptions(): Collection
-    {
-        return $this->inscriptions;
-    }
-
-    public function addInscription(Inscription $inscription): self
-    {
-        if (!$this->inscriptions->contains($inscription)) {
-            $this->inscriptions->add($inscription);
-            $inscription->addAtelier($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscription(Inscription $inscription): self
-    {
-        if ($this->inscriptions->removeElement($inscription)) {
-            $inscription->removeAtelier($this);
-        }
 
         return $this;
     }
@@ -152,6 +126,33 @@ class Atelier
             if ($vacation->getAtelier() === $this) {
                 $vacation->setAtelier(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->addAtelier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): self
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            $inscription->removeAtelier($this);
         }
 
         return $this;
