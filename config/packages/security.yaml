@@ -36,6 +36,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/ajout, roles: ROLE_ADMIN }
         - { path: ^/inscription, roles: [ROLE_USER, ROLE_ADMIN, ROLE_INSCRIT] }
         - { path: ^/validation, roles: [ROLE_USER, ROLE_ADMIN, ROLE_INSCRIT] }
         # - { path: ^/profile, roles: ROLE_USER }
