@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InscriptionController!{% endblock %}
+{% block title %}Hello ValidationController!{% endblock %}
 
 {% block body %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css">
@@ -14,7 +14,9 @@
 </style>
 
 <div class="example-wrapper">
+    
     {% if licencie is defined %}
+        <h2> Informations utilisateur </h2>
         <div>
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -64,48 +66,64 @@
               </div>
             </div>
         </div> 
-              
-    {% form_theme mailForm 'bootstrap_5_layout.html.twig' %}
-    {{ form_start(mailForm) }}
-    
-    {{ form_row(mailForm.mail) }}
-    <button type="submit" class="btn btn-lg btn-success">Changer Mail</button> 
-    
-    {{ form_end(mailForm) }}
+            <hr class="hr" />  
     {% endif %}
-    {% form_theme inscriptionForm 'bootstrap_5_layout.html.twig' %}
-    {{ form_start(inscriptionForm) }}
-    <hr class="hr" />
-        {{ form_row(inscriptionForm.ateliers) }}
-        <hr class="hr" />
-        {{ form_row(inscriptionForm.Chambres) }}
-        <hr class="hr" />
-        
-        <div class="test">
-        {{ form_row(inscriptionForm.Restauration) }}
-        </div>
-        
-        
-        <button type="submit" class="btn btn-lg btn-success">Enregistrer</button> 
-        <a class="btn btn-lg btn-primary" href="/">
-             Accueil
-         </a>
-        
-        
-    {{ form_end(inscriptionForm) }}
     
+     
+     <div>
+         
+     {% if ateliers is defined %}
+         <h2> Ateliers choisis </h2>
+         {% for atelier in ateliers %}
+            <li>{{ atelier }}</li>
+        {% endfor %}
+         <hr class="hr" />
+     {% endif %}   
+     </div>
+     
+    <div>
+         
+     {% if chambres is defined %}
+         <h2> Chambres choisis </h2>
+         {% for chambre in chambres %}
+            <li>{{ chambre }}</li>
+        {% endfor %}
+         <hr class="hr" />
+     {% endif %}   
+     </div>
+     
+     <div>
+         
+     {% if restaurations is defined %}
+         <h2> Repas choisis </h2>
+         {% for restauration in restaurations %}
+            <li>{{ restauration }}</li>
+        {% endfor %}
+         <hr class="hr" />
+     {% endif %}   
+     </div>
+     
+     
+     {% if formTest is defined %}
+    {% form_theme formTest 'bootstrap_5_layout.html.twig' %}
+    {{ form_start(formTest) }}
     
+    {{ form_row(formTest) }}
+    <button type="submit" class="btn btn-lg btn-success">Validation</button> 
+    {% if prix is defined and not prix == 0 %}
+        <a class="btn btn-lg btn-danger" href="#">
+             Prix : {{ prix }} €
+        </a>
+        {% endif %}
     
+    {{ form_end(formTest) }}
+    {% endif %}
     
+    {% if error is defined %}
+        <center><div class="alert alert-primary" role="alert">
+            {{ error }}
+          </div>
+          <a type="submit" class="btn btn-lg btn-primary" href="/">Accueil</a> </center>
+    {% endif %}
 </div>
-    
-<style>
-.form-check {
-    float:left;
-    display:block;
-    margin: 10px;
-}
-</style>
-
 {% endblock %}
-

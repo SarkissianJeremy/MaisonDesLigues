@@ -21,11 +21,13 @@ class Chambre
     #[ORM\Column]
     private ?int $Tarif = null;
 
-    #[ORM\OneToMany(mappedBy: 'Chambre', targetEntity: Inscription::class)]
-    private Collection $inscriptions;
 
     #[ORM\ManyToOne(inversedBy: 'chambres')]
     private ?Hotel $Hotel = null;
+
+    #[ORM\ManyToMany(targetEntity: Inscription::class, mappedBy: 'Chambres')]
+    private Collection $inscriptions;
+
 
     public function __construct()
     {
@@ -61,35 +63,6 @@ class Chambre
         return $this;
     }
 
-    /**
-     * @return Collection<int, Inscription>
-     */
-    public function getInscriptions(): Collection
-    {
-        return $this->inscriptions;
-    }
-
-    public function addInscription(Inscription $inscription): self
-    {
-        if (!$this->inscriptions->contains($inscription)) {
-            $this->inscriptions->add($inscription);
-            $inscription->setChambre($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscription(Inscription $inscription): self
-    {
-        if ($this->inscriptions->removeElement($inscription)) {
-            // set the owning side to null (unless already changed)
-            if ($inscription->getChambre() === $this) {
-                $inscription->setChambre(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getHotel(): ?Hotel
     {
@@ -105,6 +78,33 @@ class Chambre
     
     public function __toString() {
         return $this->libelle;
+    }
+
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->addChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): self
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            $inscription->removeChambre($this);
+        }
+
+        return $this;
     }
     
 }
