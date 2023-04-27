@@ -21,9 +21,6 @@ class Atelier
     #[ORM\Column]
     private ?int $nbPlacesMaxi = null;
 
-    #[ORM\ManyToMany(targetEntity: Inscription::class, mappedBy: 'Atelier')]
-    private Collection $inscriptions;
-
     #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Theme::class)]
     private Collection $Themes;
 
@@ -35,7 +32,6 @@ class Atelier
 
     public function __construct()
     {
-        $this->inscriptions = new ArrayCollection();
         $this->Themes = new ArrayCollection();
         $this->Inscriptions = new ArrayCollection();
         $this->vacations = new ArrayCollection();

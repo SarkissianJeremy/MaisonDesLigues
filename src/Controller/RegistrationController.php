@@ -67,6 +67,7 @@ class RegistrationController extends AbstractController
             $user->setDateEnregistrementArrivee(new \DateTime());
             $licencie = $doctrine->getRepository(Licencie::Class)->findOneBy(array('numlicence' => $form->get('numLicence')->getData()));
             $user->setEmail($licencie->getMail());
+            $user->setRoles(['ROLE_INSCRIT']);
             
             $entityManager->persist($user);
             $entityManager->flush();
