@@ -18,15 +18,13 @@ class Inscription
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
     private ?Chambre $Chambre = null;
 
-    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
-    private ?User $Participant = null;
-
     #[ORM\ManyToMany(targetEntity: Restauration::class, inversedBy: 'inscriptions')]
     private Collection $Restauration;
 
-    #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'inscriptions')]
-    private Collection $Atelier;
-
+    #[Assert\Count(
+            min: 1,
+            max: 5,
+    )]
     #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'Inscriptions')]
     private Collection $ateliers;
 
@@ -36,7 +34,6 @@ class Inscription
     public function __construct()
     {
         $this->Restauration = new ArrayCollection();
-        $this->Atelier = new ArrayCollection();
         $this->ateliers = new ArrayCollection();
     }
 
@@ -53,18 +50,6 @@ class Inscription
     public function setChambre(?Chambre $Chambre): self
     {
         $this->Chambre = $Chambre;
-
-        return $this;
-    }
-
-    public function getParticipant(): ?User
-    {
-        return $this->Participant;
-    }
-
-    public function setParticipant(?User $Participant): self
-    {
-        $this->Participant = $Participant;
 
         return $this;
     }
@@ -89,30 +74,6 @@ class Inscription
     public function removeRestauration(Restauration $restauration): self
     {
         $this->Restauration->removeElement($restauration);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Atelier>
-     */
-    public function getAtelier(): Collection
-    {
-        return $this->Atelier;
-    }
-
-    public function addAtelier(Atelier $atelier): self
-    {
-        if (!$this->Atelier->contains($atelier)) {
-            $this->Atelier->add($atelier);
-        }
-
-        return $this;
-    }
-
-    public function removeAtelier(Atelier $atelier): self
-    {
-        $this->Atelier->removeElement($atelier);
 
         return $this;
     }
