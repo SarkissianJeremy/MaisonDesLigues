@@ -26,9 +26,9 @@ class InscriptionType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ))
-            ->add('Chambre', EntityType::class, array(
+            ->add('Chambres', EntityType::class, array(
                 'class' => Chambre::class,
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' => true,
                 'required' => false,
                 'placeholder' => 'Aucun'

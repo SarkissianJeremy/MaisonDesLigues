@@ -402,3 +402,7 @@ insert into chambre(hotel_id, libelle, tarif) values(1, "Double", 100);
 
 insert into chambre(hotel_id, libelle, tarif) values(2, "Single", 65);
 insert into chambre(hotel_id, libelle, tarif) values(2, "Double", 75);
+
+INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-08', 'Samedi: Midi');
+INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-08', 'Samedi: Soir');
+INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-09', 'Dimanche: Midi');

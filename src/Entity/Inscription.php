@@ -6,6 +6,7 @@ use App\Repository\InscriptionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use SymfonyComponent\Validator\Constraintes as Assert;
 
 #[ORM\Entity(repositoryClass: InscriptionRepository::class)]
 class Inscription
@@ -15,9 +16,6 @@ class Inscription
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
-    private ?Chambre $Chambre = null;
-
     #[ORM\ManyToMany(targetEntity: Restauration::class, inversedBy: 'inscriptions')]
     private Collection $Restauration;
 
@@ -25,16 +23,23 @@ class Inscription
     private ?User $user = null;
 
     #[Assert\Count(
-            min:1,
-            max:5,
+            min: 1,
+            max: 5,
     )]
     #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'inscriptions')]
     private Collection $ateliers;
+
+    #[ORM\ManyToMany(targetEntity: Chambre::class, inversedBy: 'inscriptions')]
+    private Collection $Chambres;
+
+    #[ORM\Column]
+    private ?bool $is_validated = null;
 
     public function __construct()
     {
         $this->Restauration = new ArrayCollection();
         $this->ateliers = new ArrayCollection();
+        $this->Chambres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -42,17 +47,6 @@ class Inscription
         return $this->id;
     }
 
-    public function getChambre(): ?Chambre
-    {
-        return $this->Chambre;
-    }
-
-    public function setChambre(?Chambre $Chambre): self
-    {
-        $this->Chambre = $Chambre;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Restauration>
@@ -114,4 +108,41 @@ class Inscription
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Chambre>
+     */
+    public function getChambres(): Collection
+    {
+        return $this->Chambres;
+    }
+
+    public function addChambre(Chambre $chambre): self
+    {
+        if (!$this->Chambres->contains($chambre)) {
+            $this->Chambres->add($chambre);
+        }
+
+        return $this;
+    }
+
+    public function removeChambre(Chambre $chambre): self
+    {
+        $this->Chambres->removeElement($chambre);
+
+        return $this;
+    }
+
+    public function isIsValidated(): ?bool
+    {
+        return $this->is_validated;
+    }
+
+    public function setIsValidated(bool $is_validated): self
+    {
+        $this->is_validated = $is_validated;
+
+        return $this;
+    }
+
 }
