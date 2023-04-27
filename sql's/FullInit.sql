@@ -1,3 +1,5 @@
+use mdl;
+
 Insert into MDL.CLUB (ID,NOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL) values ('1','Institut Vallier Marseille','67a rue ferrari',null,'13005','Marseille','0491476657	');
 Insert into MDL.CLUB (ID,NOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL) values ('2','Escrime Provence','1bis impasse des Independants',null,'13013','Marseille','0671205105	');
 Insert into MDL.CLUB (ID,NOM,ADRESSE1,ADRESSE2,CP,VILLE,TEL) values ('3','Toulon Var Esscrime','Complexe sportif Vert Coteau','Rue Sous Lieutenant Guy Friggeri','83000','Toulon','0494366517	');
@@ -406,3 +408,9 @@ insert into chambre(hotel_id, libelle, tarif) values(2, "Double", 75);
 INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-08', 'Samedi: Midi');
 INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-08', 'Samedi: Soir');
 INSERT INTO `restauration` (`date`, `type_repas`) VALUES ( '2023-09-09', 'Dimanche: Midi');
+
+INSERT INTO `user` ( `numlicence`, `roles`, `password`, `date_inscription`, `date_enregistrement_arrivee`, `is_verified`, `email`) VALUES
+( '16360514319', '[\"ROLE_ADMIN\"]', '$2y$13$/rTdBf52hvuioZShSbLOWeQuxeq9MSkRmKGv7aKIoJzPAoJyPqdCu', '2023-04-27', '2023-04-27', 1, 'sem.Nulla.interdum@IntegermollisInteger.edu');
+
+INSERT INTO `user` (`numlicence`, `roles`, `password`, `date_inscription`, `date_enregistrement_arrivee`, `is_verified`, `email`) VALUES
+( '16810817465', '[\"ROLE_INSCRIT\"]', '$2y$13$JTLT.KtNBnt7D4fYoRjTbOxDoNCZXxkPG53mTXiizsfW2bvwyWPWO', '2023-04-27', '2023-04-27', 1, 'Morbi.non.sapien@SuspendisseeleifendCras.co.uk');
