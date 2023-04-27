@@ -33,7 +33,6 @@ class InscriptionType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Aucun'
             ))
-            ->add('user')
         ;
     }
 

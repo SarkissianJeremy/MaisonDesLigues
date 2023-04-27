@@ -21,15 +21,15 @@ class Inscription
     #[ORM\ManyToMany(targetEntity: Restauration::class, inversedBy: 'inscriptions')]
     private Collection $Restauration;
 
-    #[Assert\Count(
-            min: 1,
-            max: 5,
-    )]
-    #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'Inscriptions')]
-    private Collection $ateliers;
-
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
     private ?User $user = null;
+
+    #[Assert\Count(
+            min:1,
+            max:5,
+    )]
+    #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'inscriptions')]
+    private Collection $ateliers;
 
     public function __construct()
     {
@@ -78,13 +78,6 @@ class Inscription
         return $this;
     }
 
-    /**
-     * @return Collection<int, Atelier>
-     */
-    public function getAteliers(): Collection
-    {
-        return $this->ateliers;
-    }
 
     public function getUser(): ?User
     {
@@ -94,6 +87,30 @@ class Inscription
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Atelier>
+     */
+    public function getAteliers(): Collection
+    {
+        return $this->ateliers;
+    }
+
+    public function addAtelier(Atelier $atelier): self
+    {
+        if (!$this->ateliers->contains($atelier)) {
+            $this->ateliers->add($atelier);
+        }
+
+        return $this;
+    }
+
+    public function removeAtelier(Atelier $atelier): self
+    {
+        $this->ateliers->removeElement($atelier);
 
         return $this;
     }
